@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import Login from './pages/Login'
 import List from './pages/List'
+import Detail from './pages/Detail'
 import NotFound from './pages/NotFound'
 
 class Root extends Component {
@@ -20,6 +21,7 @@ class Root extends Component {
             <Switch>
               <Route exact path="/" component={Login} />
               <Route exact path="/list" component={List} />
+              <Route exact path="/detail/:index" component={Detail} />
               <Route exact path="*" component={NotFound} />
             </Switch>
           {/*</App>*/}

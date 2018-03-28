@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import Modal from '../../components/molecules/Modal'
+import { changeModal } from '../../redux/actions/Modal'
 import { submitId, submitPass, loginBool } from '../../redux/actions/Login'
+
 
 class Login extends Component {
   constructor(props) {
@@ -10,17 +13,26 @@ class Login extends Component {
   }
 
   loginButtonClicked(e) {
-    const {submitId, submitPass, loginBool, history} = this.props
-    submitId(this.refs.id.value)
-    submitPass(this.refs.pass.value)
-    loginBool(true)
+    const {submitId, submitPass, loginBool, changeModal, history} = this.props
+    const id = this.refs.id.value
+    const pw = this.refs.pass.value
+
+    if(id === "takeda" && pw === "shinji") {
+      submitId(this.refs.id.value)
+      submitPass(this.refs.pass.value)
+      loginBool(true)
+    } else {
+      loginBool(false)
+      changeModal(true)
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    const {history} = this.props
+    const { history, login } = this.props
 
     console.log('*****************')
     console.log("nextProps")
+    console.log(login)
     console.log(nextProps)
     console.log('*****************')
 
@@ -30,32 +42,34 @@ class Login extends Component {
   }
 
   render() {
-    const { login } = this.props
+    const { login, modal, changeModal } = this.props
 
     console.log('*****************')
-    console.log(login)
+    console.log("Login render")
+    console.log(this.props)
     console.log('*****************')
 
     return (
       <div>
-        <p>ID: &nbsp;&nbsp;<input type="text" ref="id" id="id" /></p>
-        <p>PW: <input type="password" ref="pass" id="pass" /></p>
+        <p>ID: &nbsp;&nbsp;<input id="id_input" type="text" ref="id" /></p>
+        <p>PW: <input id="pass_input" type="password" ref="pass" /></p>
         <p>
-          <button onClick={this.loginButtonClicked.bind(this)}>
+          <button id="login_button" onClick={this.loginButtonClicked.bind(this)}>
             <p>Login</p>
           </button>
         </p>
+        <Modal>ID,PWに誤りがあります</Modal>
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return {login: state.login}
+  return { login: state.login, modal: state.modal }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Object.assign({}, {submitId, submitPass, loginBool}), dispatch)
+  return bindActionCreators(Object.assign({}, {submitId, submitPass, loginBool, changeModal}), dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))

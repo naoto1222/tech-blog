@@ -4,6 +4,7 @@ const src  = path.resolve(__dirname, 'src')
 const dist = path.resolve(__dirname, 'dist')
 
 module.exports = {
+  mode: 'development',
   entry: src + '/index.js',
 
   output: {

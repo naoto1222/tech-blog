@@ -21,7 +21,4 @@ function mapDispatchToProps(dispatch) {
   return {}
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NotFound)
+export default connect(mapStateToProps, mapDispatchToProps)(NotFound)
