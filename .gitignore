@@ -1,0 +1,46 @@
+*.class
+*.log
+.DS_Store
+
+# digdag
+.digdag/
+
+# sbt specific
+.cache
+.history
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Scala-IDE specific
+.idea/
+
+# npm
+node_modules/
+.node-version
+
+# web
+bundle.js
+app.css
+*.map
+
+# design
+.sass-cache/
+
+# direnv
+.envrc
+
+# idea
+.idea/*
+.idea/misc.xml
+.idea/vcs.xml
+./idea/*
+
+# other
+tmp/
+.oracle_jre_usage/
+.python-version
